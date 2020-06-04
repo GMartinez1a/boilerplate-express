@@ -1,12 +1,13 @@
 
 var express = require('express');
 var app = express();
+var bodyParser = require('body-parser');
 
 // --> 7)  Mount the Logger middleware here
 app.use(logger);
 
 // --> 11)  Mount the body-parser middleware  here
-
+app.use(bodyParser.urlencoded({extended: false}));
 
 /** 1) Meet the node console. */
 console.log("Hello World");
@@ -31,7 +32,7 @@ app.use(express.static(__dirname + '/public'));
 
 /** 6) Use the .env file to configure the app */
 app.get('/json', (req, res) => {
-    process.env.MESSAGE_STYLE='uppercase'?res.json({"message": "HELLO JSON"}):res.json({"message": "Hello json"});
+    process.env.MESSAGE_STYLE=='uppercase'?res.json({"message": "HELLO JSON"}):res.json({"message": "Hello json"});
 });
  
 /** 7) Root-level Middleware - A logger */
